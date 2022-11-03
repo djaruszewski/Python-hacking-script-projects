@@ -36,13 +36,36 @@ def extract_hash(charset, user_id, password_length):
                 break
     return found
 
+
+"""Binary Search
+- we know the minimum and maximum values (0 and f)
+- instead of guessing the unknown value, compare with the middle
+   → If less, compare again, with a new minimum and maximum from the left
+   → If more, compare again, with a new minimum and maximum from the right
+"""
+
 def extract_hash_bst(charset, user_id, password_length):
     found = ""
     for index in range(0, password_length):
         start = 0
         end = len(charset) - 1
         while start <= end: # basically saying 'while we still have a middle'
-            if end - start == 1: # see notes:search space exhausted
+            if end - start == 1:
+            """this means our search space is exhausted;
+            we dont need to keep iterating over the
+            middle; one of the reasons for this is bc
+            we are using greater than and not equal
+            in our query. And the charset length we
+            using is even. What this means is that when
+            start is 0 in our binary search we need to
+            still check whether the actual value is
+            also greater than 0 before we can choose to
+            set the actual value to be either 0 or 1
+            - otherwise we are just randomly guessing btw 0 and 1 
+              and we dont really know the
+                correct value
+                → so we want to check if the start is equal to 0
+                """
                 if start == 0 and  boolean_query(index, user_id, charset[start]):
                     found += charset[start]
                 else:
