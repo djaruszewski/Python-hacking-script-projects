@@ -1,7 +1,7 @@
 from pwn import *
 import sys
 
-# it might be more convienent to pass that data on the command line,
+# it might be more convienent to pass data on the command line,
 # here we verify correct # of arguments and make obvious how to use the script
 if len(sys.argv) != 2:
     print("Invalid arguments!")
